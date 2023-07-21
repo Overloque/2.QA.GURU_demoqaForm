@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import com.codeborne.selenide.Configuration;
 
-import java.io.File;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -21,7 +19,10 @@ public class DemoFormTests {
 
     @Test
     void checkFormTest() {
+
         open("/automation-practice-form");
+        executeJavaScript("$('#fixedban').remove()");
+        executeJavaScript("$('footer').remove()");
 
         //Заполнение форм
 
@@ -37,7 +38,7 @@ public class DemoFormTests {
         $("#subjectsInput").setValue("Biology").pressEnter();
         $("#hobbiesWrapper").$(byText("Sports")).click();
 
-        $("#uploadPicture").uploadFile(new File("src/test/resources/image.png"));
+        $("#uploadPicture").uploadFromClasspath("image.png");
         $("#currentAddress").setValue("Address");
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
